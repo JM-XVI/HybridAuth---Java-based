@@ -1,0 +1,101 @@
+package menu;
+import java.util.Random;
+import java.util.Scanner;
+
+public class rand_pass {
+
+	public static void randPass() {
+			
+		
+			//Create a Scanner - allows for user input
+			Scanner in = new Scanner(System.in);
+			
+			//Ask for login username or email
+			System.out.println("Enter your username or login email");
+			System.out.println("");
+			String str = in.nextLine();
+			
+			//Ask for number of password generation
+			System.out.print("How many passwords do you want to generate? ");
+			System.out.println("");
+			int total = in.nextInt();
+
+			//Ask for length of password
+			System.out.print("How long do you want your passwords to be? ");
+			System.out.println("");
+			int length = in.nextInt();
+
+			//Allows for array for passwords to be created
+			String[] randPassNew = new String[total];
+
+			//This will generate the number of passwords based on user input
+			for(int i = 0; i < total; i++) {
+				//variable to store password
+				String rand_pass = "";
+				//Character randonly selected alongisde set length from user
+				for(int j = 0; j < length; j++) {
+					//Add lowercase or uppercase character to String - selected randomly
+					rand_pass += randomCharacter();
+				}
+				//Add the random password to your array
+				randPassNew[i] = rand_pass;
+			}
+
+			
+			//Print username
+			System.out.println("Username or login email:");
+			System.out.println("");
+			System.out.println(str);
+			System.out.println("");
+			
+			//Print out the password
+			System.out.println("This is your generated password: ");
+			System.out.println("");
+			printArray(randPassNew);
+			System.out.println("");
+
+	  }
+
+
+		//Create a function that prints out an array that allows for parsing when compiling random password
+		public static void printArray(String[] arr) {
+			for(int i = 0; i < arr.length; i++) {
+				System.out.println(arr[i]);
+			}
+		}
+
+		//Set values to corresponding values in ASCII
+		//'0' - '9' => 48-57 in ASCII
+		//'A' - 'Z' => 65-90 in ASCII
+		//'a' - 'z' => 97-122 in ASCII
+		public static char randomCharacter() {
+			//We multiply Math.random() by 62, total of: Integer + Uppercase + Lowercase
+			int entropy = (int)(Math.random()*62);
+			
+			if(entropy <= 9) {
+				//Number (48-57 in ASCII)
+				//Convert 0-9 to 48-57
+				int numb = entropy + 48;
+				//Any number from 0-9 randomly set
+				//int value then parsed to char
+				return (char)(numb);
+				
+			} else if(entropy <= 35) {
+				//Uppercase letters (65-90 in ASCII)
+				//Convert uppercase letters 10 - 35 to ASCII - 65-90
+				int uppercase = entropy + 55;
+				//Uppercase letter randomly set
+				//Value parsed to char
+				return (char)(uppercase);
+				
+			} else {
+				//Lowercase letter (97-122 in ASCII)
+				//Convert lowercase letters 36-61 to ASCII - 97-122
+				int lowercase = entropy + 61;
+				//Lowercase values set
+				//Values then parsed to char
+				return (char)(lowercase);
+			}
+		}
+
+	}
