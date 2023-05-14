@@ -1,0 +1,55 @@
+package menu;
+
+
+	import java.io.Serializable;
+	import java.util.HashMap;
+
+	public class Event_Rec implements Serializable {
+		
+		/*We want a file to be produced containing the users Keystroke dynamics,
+		 * therefore we need a function that can read our class attributes and place them
+		 * into the output file. SerialUID specifies this set of attributes and is able
+		 * to read the state of objects from the file.
+		 */
+		
+		private static final long serialVersionUID = 1L;
+		//serialVersion is a security aspect - only matching UID can access the BackEnd code
+		//configure HashMap into integer and long variable types
+		private HashMap<Integer, Long> Mapped;
+		//Create function Event_Rec
+	    public Event_Rec(String owner) {
+	        this.Mapped = new HashMap<Integer, Long>(26);
+	    }
+
+	    //Record average key time, Dwell refers to length of time per key
+	    public boolean addKey(int keyref, long Dwell) {
+	        try {
+	        	//Reference to HashMap - storing set key when pressed
+	            if (Mapped.containsKey(keyref)) {
+	            	//Calculation to ensure long enough time is provided for user
+	            	//Keycode - time set, alongside its hashed state to be greater than 500000000
+	            	//if user does not input any keys - will not be set
+	                if (Math.abs(Mapped.get(keyref) - Dwell) > 500000000) {
+	                    System.out.println("Dwell time unable to be set");
+	                    return false;
+	                }
+	                //set calculation for storing dwell time
+	                Dwell = (Dwell + Mapped.get(keyref)) / 2;
+
+	                //store in Mapped
+	                Mapped.put(keyref, Dwell);
+	                return true;
+	            }
+	            //Catch errors in case user falsifies system
+	            Mapped.put(keyref, Dwell);
+	            return true;
+	        } catch (Exception e) {
+	            System.out.println("Error: " + e.getMessage());
+	        } finally {
+	        }
+	        return false;
+
+	    }
+	}
+	
+
