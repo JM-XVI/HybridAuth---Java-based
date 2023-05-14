@@ -1,0 +1,72 @@
+package menu;
+
+import java.util.*; //Imports all java functions
+import java.text.DecimalFormat; //Allows for decimal format to be used when selecting topic in Menu
+import java.util.Scanner;
+public class Menu {
+//Import java util allows for the scanner function and other basic utilities within java to be accessed within the class
+	public static void runMenu() {
+
+	}
+
+	public static void main (String[] args) {
+		go();	
+		//Main method is made in order for the program to be executed
+		//"go():" is what allows for the menu function to be stored and applied to the loop within the menu
+	}
+
+	public static void go()
+	{
+		boolean topic = true;
+		while (topic)
+		//While loop is created where each condition is set to true in order for each condition to be accessed
+		{
+			System.out.println("");
+			System.out.println("Welcome to the application");
+			System.out.println("");
+			System.out.println("1. Password generator");
+			System.out.println("");
+			System.out.println("2. Kesystroke dynamics function");
+			System.out.println("");
+			System.out.println("3. Exit");
+			System.out.println("");
+			//Prints out the menus options in order for the user to see the displayed options within the menu
+			
+			Scanner input = new Scanner (System.in);
+			System.out.print("Please select the function you would like to access, enter a number of (1 to 3)");
+			System.out.println("");
+			int choice = input.nextInt();
+			/*Scanner allows for the user to input there choice within for what option they want within the menu
+			 * The program will ask them this using the print function
+			 * There is also a space implemented between each of the menu options and the menu itself */
+			
+			switch(choice)
+			{
+      /*case and break allow for each topic to now be accessed
+      case splits each topic into its individual code block so only that can be accessed when given the equivalent input
+      break allows for the topic to be split and ensure that each code block doesn't interfere with one another*/
+          
+        case 1:
+        	System.out.println("");
+        	rand_pass.randPass();
+          break;
+          
+        case 2:
+        	System.out.println("");
+          break;
+        
+        case 3:
+			System.out.println("");
+			System.out.println("You have exited the application");
+			topic = false;
+			break;
+			//This simply allows for the user to exit the program
+		default:
+			System.out.println("Please enter one of the values from 1 to 3");
+			//This allows for the program to ask the user for a valid input in case they do not input a valid value
+          break;
+          
+			}
+		}
+	}
+}
